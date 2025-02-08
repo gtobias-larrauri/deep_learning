@@ -15,7 +15,7 @@
 \newcommand{\tred}[1]{\textcolor{red}{#1}}
 
 
-
+\graphicspath{.}
 \title{Deep learning notes}
 \author{Guillem Tobías Larrauri}
 \date{January 2025}
@@ -27,8 +27,197 @@
 \section{Theory}
 
 
-\section{Math}
-From Mathematics for Machine learning
+\section{Math: From Mathematics for Machine learning}
+\tblue{This will be copied over and is needed for ML and also Deep and Graph learning,
+I will be adding notes on which chapters matter most for where.}
+
+\subsection{Linear Algebra}
+An algebra is a set of objects and a set of rules to manipulate these objects.
+Vectors are objects such that they can be added together and multiplied by a constant and the result is still a vector.
+\begin{center}
+    \includegraphics[scale=0.8]{2linalg.png} % Adjust scale as needed
+\end{center}
+\subsubsection{Systems of linear equations}
+We will mostly ignore for now.
+
+\subsubsection{Matrices}
+A matrix as an m * n tuple of elements $a_{ij}$, we define it as \textbf{A}
+We have some important properties of all matrices \tblue{TO DO!}
+$\forall \textbf{A} \in \mathbb{R}^{m \times n} : \textbf{I}_m \textbf{A} = \textbf{A} \textbf{I}_n = \textbf{A} $
+
+The transpose and the inverse (which not always exists, but when it exists it is unique.)
+Some important properties of transpose and inverse:
+\begin{itemize}
+    \item $\textbf{A} \textbf{A}^{-1} = \textbf{I} = \textbf{A}^{-1}\textbf{A}$
+    \item $(\textbf{A}\textbf{B})^{-1} = \textbf{B}^{-1} \textbf{A}^{-1}$
+    \item $(\textbf{A} + \textbf{B})^{-1} \neq \textbf{A}^{-1} + \textbf{B}^{-1}$
+    \item $(\textbf{A}^T)^{T} = \textbf{A}$
+    \item $(\textbf{A} + \textbf{B})^T = \textbf{A}^T + \textbf{B}^T$
+    \item $\textbf{AB}^T = \textbf{B}^T \textbf{A}^T$
+\end{itemize}
+A matrix is symmetric if it is equal to its transpose and we also have $(\textbf{A}^{-1})^T = (\textbf{A}^T)^{-1} =: \textbf{A}^{-T}$
+For multiplication by a scalar all properties are super intuitive.
+
+\subsubsection{Solving systems of linear equations, we skip for now}
+We can represent compactly via $\textbf{A} \textbf{x} = \textbf{b}$
+
+If the matrix \textbf{A} is square we can directly compute the solution (if it exists) as $\textbf{x} = \textbf{A}^{-1} \textbf{b}$
+If the columns of a non square matrix are linearly independent we can compute the following:
+$\textbf{A} \textbf{x} = \textbf{b} \iff \textbf{A}^T \textbf{A} \textbf{x} = \textbf{A}^T \textbf{b} \iff \textbf{x} =
+ (\textbf{A}^T \textbf{A})^{-1}\textbf{A}^T \textbf{b}    
+$
+
+\subsubsection{Vector spaces}
+\tblue{Add the math if needed.}
+\textit{Groups:} 
+We consider a set $\mathcal{G}$ and an operation $ \otimes : \mathcal{G} \times \mathcal{G} \longrightarrow \mathcal{G}  $
+\begin{itemize}
+    \item Closure: For any x and y in the group, if we apply the operation to x and y the result will still be in the group
+    \item Associativity For any 3 in the group the parentheses can be changed meaning we do one operation first or second and we get the same result.
+    \item Neutral element: There exists in the group a neutral element such that if we apply the operation to anything in the group the result will be the original thing
+    \item Inverse element: There exists for every element in the group another element such that if we apply the operation we will get the neutral element.
+\end{itemize}
+If we have commutative property (x * y = y * x) we have \textbf{Abelian group.}
+We then have some examples of what is and what is not a group.
+\\
+\\
+\textbf{Vector spaces}
+A vector space will now have two operations, an inner operation and an outer operation.
+\begin{itemize}
+    \item  $ + : \mathcal{V} \times \mathcal{V} \longrightarrow \mathcal{V} $
+    \item $* : \mathbb{R} \times \mathcal{V} \longrightarrow \mathcal{V} $
+\end{itemize}
+And:
+\begin{itemize}
+    \item $(\mathcal{V}, + )$ is an Abelian group.
+    \item We have distributivity with respect to the scalar/outer operation 
+    \item We have Associativity with respect to outer operation
+    \item There exists a neutral element with respect to outer operation
+\end{itemize}
+Our inner operation will therefore be vector addition and the outer will be multiplication by scalars
+Vector multiplication is not defined for all as the dimensions may not be the same.
+
+\textbf{Examples:} I don't understand why $\mathbb{R}^{m \times n} $ is a vector space if the inverse may not exist. AH, inverse with respect to inner operation,
+meaning find another matrix such that we can get the inverse. And that is always defined by Abelian, meaning commutative under the sum.
+\\
+\\
+\textbf{Vector subspaces:} 
+Subsets of the original space such that when we perform the operations (sum and multiplication) we will never
+leave the subspace. 
+
+We will naturally inherit many of the properties from the larger vector space.
+However we need to show that U is not empty, that the 0 element is in there and that we
+have closure with respect to both the outer and inner operations.
+
+\textit{Every subspace of Rn isthe solution space of a system of homogeneous linear equations.}
+I don't fully understand the implications of this.
+\\
+\\
+\subsubsection{Linear independence}
+Consider a vector space V and a finite number of vectors (k). Remember matrices are also vectors in the R nm vector space.
+
+Every $\textbf{v} \in V $ of the form $\textbf{v} = \sum_{i=1}^{k}\lambda_i \textbf{x}_i \in V$
+where the lambdas are real numbers are a linear combination of the initial vectors x.
+Notice we apply both operations, the inner operation in the sum and the outer operation.
+$\textbf{0}$ can always be written as a linear combination.
+\\
+\\
+The notion of \textbf{linear independence} is the following: If from the original vectors we
+can build a non trivial linear combination that gives us the $\textbf{0}$ vector the original vectors are linearly dependent.
+If only setting all lambdas to 0 gives us the solution the vectors are linearly independent.
+\textit{There are a set of practical rules in the book such that we show if they are independent or not, you can also solve the whole system (pain)}
+\\
+\\
+\tblue{The intuition is that if we drop any of the original vectors we are losing informaiton!}
+tblue{Review page 32 prett cool!}
+\subsubsection{Basis and rank}
+In a vector space we are interested in a subset of it such that any vector in the larger space 
+can be generated as a linear combination of the vectors in the smaller set.
+The set of all linear combinations is called the span of a set. If a subset A spans the whole vector space V we say 
+V = span(A). Generating sets are sets are sets that span the vector space.
+
+A \textbf{Basis} is: The minimal generating set.
+Can also be defined in terms of linear independence, it is the maximal linearly independent set of vectors in V
+Also uniqueness things, yesyes.
+\begin{itemize}
+    \item Every vector space has a basis, however there is not unique basis. All basis have the same number of vectors.
+    \item To find a basis we can see the original vectors, then solve $\sum_{i=1}^{k}\lambda_i \textbf{x}_i = \textbf{0}$ which can be put in matrix form
+    Then find pivot columns and those will be the span. 
+    \item Example 2.14 is beautiful \tblue{Solving linear systems is useful!!}
+\end{itemize}
+
+The \textbf{Rank} of a matrix is closely defined:
+With it we can see the span of the columns and the rows. Columns are m dimensional and so on.
+\tblue{Important remarks for solvable system and existance of an inverse, gp back adn write down!}
+
+\subsubsection{Linear mappings}
+\tblue{I get lost with this!!! Do a review in the future for now move on.}
+A linear mapping $\textbf{v}$ from V to W vector if for any two vectors in the original space
+and any two real numbers we get $\Phi (\lambda \textbf{x} + \psi  \textbf{y}) =\lambda \Phi ( \textbf{x}) +\psi  \Phi (\textbf{y})$
+
+We can represent linear mappings as \textit{matrices} and we will see more about this.
+
+Special linear mappings:
+\begin{itemize}
+    \item Injective, if we have two vectors equal after transform they were equal in the original space.
+    \item Surjective, we can reach any point in the second vector space from the first vector space using the mapping.
+    \item Bijective if 1 and 2 hold
+\end{itemize}
+Bijective mappings can be undone with the inverse mapping, so this guarantees existance or whatever.
+Isomorphic is if linear and bijective from V to W. 
+
+We have a theorem that says that V and W are isomophic iff they have the same dimension.
+This justifies treating $\mathbb{R}^{m \times n} = \mathbb{R}^{mn} $ we can unstack the matrix and 
+not lose any information. Because there exists a bijective linear mapping that goes from one to the other.
+
+\tblue{There are some extra properties that I can write down in p 38.}
+\\
+\\
+\textbf{Matrix representation of linear mappings:}
+Bottom line is that linear mappings can be represented as matrices.
+
+
+Any n dimensional vector space is isomophic to $\mathbb{R}^n$ 
+We will then define B = $(\textbf{b}_1,...,\textbf{n})$ as an ordered basis.
+
+Then for any vector space V with its ordered basis B, we can define any vector inside the space
+as $\sum_{i=1}^{n}\alpha_i \textbf{b}_i$ and this representation is unique, and the alphas are 
+the coodrinate representation of the vector x with basis B.
+\tblue{Example 2.20 exaplains this but I still don't fully understand the uses.}
+\textbf{I don't fully understand definition 2.19}
+Some transformation matrix to go from one ordered basis to other coordinates in W.
+And if we have coordinates in the other space we can uniquely identify the vector by 2.18?! \tblue{I think this is it more or less.}
+
+\subsubsection{Exercises and complete above}
+
+
+\subsection{Analytic geometry}
+Goes into geometric interpretation for linear algebra, lengths and distances between two vectors
+inner products and norms and finally orthogonal projections.
+
+\begin{center}
+    \includegraphics[scale=0.8]{3geom.png} % Adjust scale as needed
+\end{center}
+
+\subsubsection{Norms}
+A norm is a defined on a vector space and goes from the vector space to a real number. It defines the length of a vector.
+To be a proper norm the following need to hold for any two vectors in the space and any real number lambda:
+\begin{itemize}
+    \item $\| \lambda \textbf{x} \| = abs(\lambda)\|\textbf{x} \|  $
+    \item $\|\textbf{x} + \textbf{y} \| \leq \|\textbf{x} \| + \| \textbf{y} \|  $
+    \item Positive definite meaning larger or equal than 0 and 0 for the 0 vector.
+\end{itemize}
+We usually use the Euclidean norm $\sqrt{\textbf{x}^T\textbf{x}}$ which computes
+the eucldiean distance from the origin.
+
+\subsubsection{Inner products}
+Allow introduction of geometrical concepts like length angle and distance between two vectors.
+The simplest is the dot product.
+
+The general definition of a inner product is as a positive definite (no neg distances), symmetric(distance a to b is same as b to a)
+and bilinear (why not) such that it maps from $V \times V \rightarrow \mathbb{R} $
+
+
 
 \section{Tensorflow}
 
