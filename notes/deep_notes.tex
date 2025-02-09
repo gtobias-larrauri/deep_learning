@@ -152,10 +152,11 @@ With it we can see the span of the columns and the rows. Columns are m dimension
 
 \subsubsection{Linear mappings}
 \tblue{I get lost with this!!! Do a review in the future for now move on.}
+Non linear mapping is if the two properties hold individually but not necessarily together.
 A linear mapping $\textbf{v}$ from V to W vector if for any two vectors in the original space
 and any two real numbers we get $\Phi (\lambda \textbf{x} + \psi  \textbf{y}) =\lambda \Phi ( \textbf{x}) +\psi  \Phi (\textbf{y})$
-
-We can represent linear mappings as \textit{matrices} and we will see more about this.
+Therefore the result is still a vector space, added and multiplied is still preserved. It is going to be a different vector space though!
+We can represent linear mappings as \textbf{matrices} and we will see more about this.
 
 Special linear mappings:
 \begin{itemize}
@@ -178,18 +179,48 @@ Bottom line is that linear mappings can be represented as matrices.
 
 
 Any n dimensional vector space is isomophic to $\mathbb{R}^n$ 
-We will then define B = $(\textbf{b}_1,...,\textbf{n})$ as an ordered basis.
+We will then define B = $(\textbf{b}_1,...,\textbf{b}_n)$ as an ordered basis.
 
 Then for any vector space V with its ordered basis B, we can define any vector inside the space
 as $\sum_{i=1}^{n}\alpha_i \textbf{b}_i$ and this representation is unique, and the alphas are 
-the coodrinate representation of the vector x with basis B.
-\tblue{Example 2.20 exaplains this but I still don't fully understand the uses.}
-\textbf{I don't fully understand definition 2.19}
-Some transformation matrix to go from one ordered basis to other coordinates in W.
-And if we have coordinates in the other space we can uniquely identify the vector by 2.18?! \tblue{I think this is it more or less.}
+the coordinate representation of the vector x with basis B.
+Let's say we are in R2 and we have the canonical basis ((0,1),(1,0)) to represent (2,2) we will pick alphas to be 2 and 2.
+But if we have a different basis (something that equivalently defines the space in R2) our alphas will be very dfifferent. Say our basis 
+is now (-1,1) and (0,1), to represent (2,2) we would need aplhas to be (4,2)
+
+\textbf{2.19}
+We now have 2 vector spaces, V, W with the following bases B = $(\textbf{b}_1,...,\textbf{b}_n) and C (\textbf{c}_1,...,\textbf{c}_m)$
+and we consider a linear mapping from V to W: $\Phi$
+Then for all j: $ \Phi(\textbf{b}_j) = \sum_{i=1}^{m} \alpha_{ij}\textbf{c}_i$ 
+is the unique representation of $\Phi(\textbf{b}_j)$ with respect to c.
+
+By the definitons we get to $\hat{\textbf{y}} = A_{\Phi}\hat{\textbf{x}}$ where x are coordinates of a vector in the original basis 
+and we use the matrix to transform to the new basis 
+\textbf{I don't understand example 2.21!!!} Use chatgpt, vector in old space maps to the new one. But the transf matrix is about
+basis, each basis element in old space can be represented a certain way in the new one. And because all vectors in a space can
+be represented as a linear combination of the basis we can apply this to all vectors in the space.
+\textbf{Example 2.22} We use a linear transform to get new coordinates and expand the square applying the transformation matrix.
+\\
+\\
+\textbf{Basis change:}
+What happens to transformation matrix if we change the basis in the old or new space 
+we can exploit this to find easy transformation matrices. \tblue{For now I skip it.}
+\\
+\\
+\textbf{Image and kernel:}
+For linear mappings:
+
+The kernel is the set of vectors in the original space such that applying the linear mapping gives you the 0 vector in the new space.
+The image is the set of vectors in the new space by applying the linear mapping into any vector of the old space.
+\tblue{Contain many interesting properties but they seem very inutitive, left for another time.}
+
+\subsubsection{Affine spaces}
+\tblue{Skipped this for now}
+
 
 \subsubsection{Exercises and complete above}
 
+\textbf{2,17,...}
 
 \subsection{Analytic geometry}
 Goes into geometric interpretation for linear algebra, lengths and distances between two vectors
@@ -217,7 +248,137 @@ The simplest is the dot product.
 The general definition of a inner product is as a positive definite (no neg distances), symmetric(distance a to b is same as b to a)
 and bilinear (why not) such that it maps from $V \times V \rightarrow \mathbb{R} $
 
+Bilinear property: For any x y z in vector space, and two real numbers:
+The inner product will satisfy the following: $$
+\Omega (\lambda x + \psi y, z) = \lambda\Omega(x,z) + \psi\Omega(y,z)
+\quad \Omega (x ,\lambda y + \psi z) = \textrm{the equivalent}
+$$
+\\
+\\
+\textbf{Symmetric positive definite matrices}
+The inner product is determined thorugh a positive definite matrix (all these matrices are symmetric, so symmetric positive definite)
+Because all vectors in the space can be represented through a linear combination of basis functions
+we can end up representing the inner product as $$\langle x, y \rangle = \textrm{properties fo the norm, bilinear} =
+\sum_{i=1}^{n}\sum_{j=1}^{n} \psi_i \langle b_i, b_j \rangle \lambda_j = \hat{x}'A\hat{y} 
+$$
+Where the elements of A are norms amongst basis vectors..0
 
+
+
+\subsubsection{Lengths and distances}
+Any inner product induces a norm: $\| x \Vert := \sqrt( \langle x,x \rangle )$
+This induced norm will always satisfy the Cauchy-Schwartz inequality: $| \langle x,y \rangle  |
+\leq \| x \Vert \| y \Vert 
+$
+
+We can define distances with these elements:
+
+$$d(x,y) := || x- y || = \sqrt{\langle x-y, x-y \rangle} $$
+
+the second step is only if the norm is induced by the inner product which may not always be true.
+
+\textbf{Inner product and distance behave in opposite directions, if large similarity we have large inner product, and low distance, and viceversa.}
+
+
+
+
+\subsubsection{Angles and orthogonality}
+By Cauchy Schwartz inequality we can define an angle between two vectors, which can be ignored without too much issue.
+
+\textit{orthogonality:} When inner product between two vectors is 0, if the vectors have norm 1 we call and are orthogonal 
+we call them orthonormal.
+
+Matrices are orthogonal if all columns are orthonormal, we define the inner product as dot product here I believe.
+$A A' = I = A' A$ the inverse is the transpose. These matrices preserve both angles and distances.
+
+\subsubsection{Orthonormal basis}
+Each basis vector is orthogonal to all the others and it has length one.
+They can be built via the Gram Schmidt process and they are used for PCA.
+
+
+
+\subsubsection{Orthogonal complement}
+We have a V (D dimensional) and a subset U (m dimensional), the orthogonal component has dimensions (D-M)
+and contains all vectors in V that are orthogonal to every vector in U. 
+Morover we can represent any vector in V through a linear combination of the basis of U and the basis of its orthogonal complement.
+\tblue{The example is pretty nice}
+
+
+\subsubsection{Inner prodcuts of functions}
+THey are integrals
+
+
+\subsubsection{Orthogonal projections}
+Let V be a vector space and $u \subseteq V$. A linear mapping $\pi: V \rightarrow U$ is called a projection
+if $\pi ^2 = \pi \circ \pi = \pi $ Because a linear mapping can be represented via a transformation matrix,
+we will call projection matrices those that have this given property.
+\\
+\\
+\textbf{Projection onto one dimensional subspaces}
+We are really trying to solve a minimization problem.
+\tblue{Read and mostly understood, write down another time. proof of orthogonality by contradiction in notebook}
+
+\tblue{Do it with ols}
+
+\subsection{Matrix decomposition}
+Determinants and eigenvalues, Cholesky and Diagonalization and SVD
+
+\subsubsection{Determinant and trace}
+The determinant is only defined for square matrices. It determines invertibility, that is if the
+determinant is 0 the matrix is not invertible.
+
+The determinant has some properties. Not that used anymore but important for eigen stuff.
+
+The trace is the sum of diagonal elements.
+
+\tblue{Add properties if they come up again in the book.}
+
+\subsubsection{Eigenvalues and eigenvectors:}
+
+Defined from the equation $ \textbf{A}\textbf{x} = \lambda \textbf{x} $
+where lambda is the igenvalue for x the eigenvector. The 0 vector is always a solution but we ignore it.
+
+Eigenvectors are not unique they can always be scaled and the result will not change.
+Eigenvectors are roots of the characteristic polynomial, that is why $det(\textbf{A} - \lambda \textbf{I}_n) = 0$
+
+All eigenvectors of A span a subspace called the eigenspace.
+
+Some properties:
+\begin{itemize}
+    \item A matrix and its transpose have the same eigenvalues but not necessarily the same eigenvectors.
+    \item The eigenspace is the null space of $\textbf{A} - \lambda \textbf{I}$ 
+    \item Something about similar matrices \tblue{Review}
+    \item Symmetric positive definite matrices have all positive real eigenvalues.
+\end{itemize}
+N eigenvectors from a Matrix with distinct eigenvalues are linearly independent, that means they form a basis of Rn.
+\\
+\\
+We can obtain a symmetric positive definite matrix from any $\textbf{A} \in \mathbb{R}^{m \times n} $
+by defining the following: $S := \textbf{A}'\textbf{A}$
+\\
+\\
+If A is symmetric there exists an orthonormal basis consisting of eigenvectors of A and all eigenvalues are real.
+We can thus decompose a matrix A = PDP' where the P contain the eigenvecrtors are columns.
+\\
+\\
+finally, the determinant of a matrix is the product of eigenvalues and the trace is the sum of eigenvalues.
+
+\subsubsection{Cholesky decomposition}
+
+A symmetric positive definite matrix can be decomposed into a lower triangular matrix and its transpose.
+$\textbf{A} = \textbf{L}\textbf{L}'$ 
+This lower triangular matrix is unique.
+Used in practice
+
+\subsubsection{Eigendecomposition:}
+With diagonal matrices and blablabla diagonal is eigenvalues.
+
+\subsubsection{Singular value decomposition}
+$$A = U \Sigma V'$$
+Where A is m * n, U is m*m, sigma is m * n and V' is n n 
+Both U and V are orthonormal and sigma is a diagonal matrix.
+
+\tblue{Cover in much more depth as well as matrix apporximation and the movie example!!!}
 
 \section{Tensorflow}
 
