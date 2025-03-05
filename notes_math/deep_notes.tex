@@ -24,7 +24,67 @@
 
 \maketitle
 
-\section{Theory}
+
+\section{Theory: Deep learning goodfellow 2016}
+This first section is structured into math basics, then modern practical deep networks
+and finally some research topics(which are now maybe also working in practice)
+\subsection{Chap 5: ML basics}
+Many tasks you can do in Machine learning, they are cooler that just regression and classification.
+
+\begin{itemize}
+    \item classification
+    \item classification with missing inputs, biomed sciences!
+    \item regression
+    \item transcription and language related stuff: from image to text
+    \item structrued output, output is a vector
+    \item anomaly detection
+    \item synthesis and sampling
+    \item imputation of missing values
+    \item denoising
+    \item density estimation: read math book.
+\end{itemize}
+
+
+\subsection{Chapter 6: Deep Feedforward Networks}
+
+No info going backwards in the layers of the model.
+The question is then how to choose the mapping $\psi$ .
+
+The strategy of deep learning is to learn $\psi$ which is often in a parametrized form,
+this way there need not be manual feature engineering, just find the right class of general functions. It is truly like regular statistics.
+
+The XOR problem shows how a linear classifier would fail and so we need to find some transformation of the underlying space that allows for better classification.
+If we think we are choosing amongst a large class of functions we can view the loss as a functional, mapping from a set of functions to a real number. And we find the best function.
+
+Finding optimums of functionals is from calculus of variations, which is complicated.
+However, we have the typical result of the \textit{conditional expectation} being optimal with squared error loss. Suposedly mse and mae are pretty bad for classification because some saturation stuff.
+
+\subsubsection{Output functions}
+\textbf{LENGTHY DISCUSSION on sigmoid... recheck}
+\tblue{Gaussian mixture outputs}
+\subsubsection{Hidden units}
+\begin{itemize}
+    \item relu 
+    \item sigmoid
+    \item maxout, check in more depth
+\end{itemize}
+Unless indicated otherwise, most hidden units can be described as accepting
+a vector of inputs $ \textbf{x} $, computing an affine transformation $\textbf{z} = \textbf{W}'\textbf{x} + \textbf{b}$
+and then applying an element wise nonlinear function $g(\textbf{z})$ most hidden units only 
+different is the choice of this activation function g(*)
+
+\subsubsection{Architecture design}
+Some theorems but mainly trial and error.
+
+\subsubsection{Backpropagation to compute gradients}
+\tblue{Check out my math book it has very good example}
+
+\subsection{Regularization for deep learning}
+A first step is to add a ridge penalty to the overall loss function.
+
+
+\subsubsection{Dataset augmentation}
+Create fake data, in terms of images you can try to rescale it or rotate it.
 
 
 \section{Math: From Mathematics for Machine learning}
